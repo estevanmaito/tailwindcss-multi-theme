@@ -24,7 +24,7 @@
     "type": "git",
     "url": "https://github.com/estevanmaito/tailwindcss-multi-theme.git"
   },
-  "keywords": [],
+  "keywords": ["tailwind", "theme", "dark", "multi"],
   "author": "Estevan Maito <ejmaito@gmail.com>",
   "license": "MIT",
   "bugs": {
