@@ -1,0 +1,13 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "scripts": {
+    "tailwind": "npx tailwind build tailwind.css -o style.css",
+    "build": "env NODE_ENV=production npx tailwind build tailwind.css -o style.css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.4.6",
+    "tailwindcss-multi-theme": "^1.0.0"
+  },
+  "license": "MIT"
+}
