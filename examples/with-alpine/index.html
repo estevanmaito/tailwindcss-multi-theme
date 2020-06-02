@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }" x-data="{ dark: false }" lang="en">
+<html 
+  :class="{ 'theme-dark': dark }" 
+  x-data="{ dark: !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}" 
+  lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
