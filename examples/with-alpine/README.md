@@ -2,9 +2,9 @@
 
 This example is very similar to the [simple one](../simple), but it has the ability to toggle between themes, apart from showing a page with a nested section with dark theme. It shows you can use not only entire themed pages, but also themed sections, inside other themed sections!
 
-🧪 You can see this example [live on CodeSandbox]()
+🧪 This is the version used for [this project's landing page]()
 
-### Download it
+### Test it
 
 Clone the repo:
 
