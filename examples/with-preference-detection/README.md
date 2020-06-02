@@ -2,7 +2,7 @@
 
 This example uses `prefers-dark.js` to apply the right theme based on user preference through `prefers-color-scheme: dark`. If you are looking for a way to also give the user options to change the theme, take a look at the exaple [with-alpine](../with-alpine)
 
-Literaly, the only difference this and the simple example is this line, before the end of `head`:
+Literally, the only difference this and the simple example is this line, before the end of `head`:
 
 ```html
   <script src="prefers-dark.js"></script>

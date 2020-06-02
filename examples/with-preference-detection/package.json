@@ -1,5 +1,5 @@
 {
-  "name": "simple",
+  "name": "with-preference-detection",
   "version": "1.0.0",
   "scripts": {
     "tailwind": "npx tailwind build tailwind.css -o style.css",
