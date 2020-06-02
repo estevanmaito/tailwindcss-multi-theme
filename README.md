@@ -9,7 +9,7 @@
 
 Most theme plugins ask too much from the start. If you know how to create a simple page with default Tailwind, you already know how to use this theme plugin.
 
-[🧪 See it live on CodeSandbox](https://codesandbox.io/)
+[🧪 See it live](https://tailwindcss-multi-theme.now.sh/)
 
 [🧱 See examples](/examples)
 
