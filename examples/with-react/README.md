@@ -1,4 +1,4 @@
-# White React
+# With React
 
 This example uses React (created with `create-react-app`), and has the ability to toggle between themes, apart from showing a page with a nested section with dark theme. It shows you can use not only entire themed pages, but also themed sections, inside other themed sections!
 
