@@ -237,7 +237,36 @@ describe('plugin', () => {
         .text-gray-100 {
           color: #333333
         }
-        .theme-dark .dark\\:focus\\:text-gray-100:focus {
+        .theme-dark .dark\\:focus\\:text-gray-100\\:focus {
+          color: #333333
+        }
+      `)
+    })
+  })
+
+  it('should generate :focus placeholder variants', () => {
+    return generatePluginCss({
+      ...baseTestTheme,
+      variants: {
+        textColor: ['dark:focus'],
+        placeholderColor: ['focus', 'dark:focus'],
+      },
+      corePlugins: ['textColor', 'placeholderColor'],
+    }).then((css) => {
+      expect(css).toMatchCss(`
+        .text-gray-100 {
+          color: #333333
+        }
+        .theme-dark .dark\\:focus\\:text-gray-100\\:focus {
+          color: #333333
+        }
+        .placeholder-gray-100::placeholder {      
+          color: #333333
+        }
+        .focus\\:placeholder-gray-100:focus::placeholder {
+          color: #333333
+        }
+        .theme-dark .dark\\:focus\\:placeholder-gray-100\\:focus::placeholder {
           color: #333333
         }
       `)
