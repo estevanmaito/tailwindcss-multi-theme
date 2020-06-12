@@ -237,7 +237,7 @@ describe('plugin', () => {
         .text-gray-100 {
           color: #333333
         }
-        .theme-dark .dark\\:focus\\:text-gray-100\\:focus {
+        .theme-dark .dark\\:focus\\:text-gray-100:focus {
           color: #333333
         }
       `)
@@ -257,7 +257,7 @@ describe('plugin', () => {
         .text-gray-100 {
           color: #333333
         }
-        .theme-dark .dark\\:focus\\:text-gray-100\\:focus {
+        .theme-dark .dark\\:focus\\:text-gray-100:focus {
           color: #333333
         }
         .placeholder-gray-100::placeholder {      
@@ -266,7 +266,7 @@ describe('plugin', () => {
         .focus\\:placeholder-gray-100:focus::placeholder {
           color: #333333
         }
-        .theme-dark .dark\\:focus\\:placeholder-gray-100\\:focus::placeholder {
+        .theme-dark .dark\\:focus\\:placeholder-gray-100:focus::placeholder {
           color: #333333
         }
       `)

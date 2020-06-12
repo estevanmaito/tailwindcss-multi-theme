@@ -82,8 +82,9 @@ module.exports = ({ addVariant, theme, e }) => {
       modifySelectors(({ selector }) => {
         return selectorParser((selectors) => {
           selectors.walkClasses((sel) => {
-            sel.value = `${tv}${separator}focus${separator}${sel.value}:focus`
+            sel.value = `${tv}${separator}focus${separator}${sel.value}`
             sel.parent.insertBefore(sel, selectorParser().astSync(root))
+            sel.parent.insertAfter(sel, selectorParser.pseudo({ value: ':focus' }))
           })
         }).processSync(selector)
       })
