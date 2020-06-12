@@ -85,13 +85,13 @@ The same way you would write it in HTML (`dark:hover:bg-red-100`) you write in y
 
 So, if you're already using `focus-within`, it would be called `dark:focus-within`, considering your theme is called `dark`.
 
-[More examples on CodeSandbox](https://codesandbox.io/s/tailwind-css-dropdown-plugin-y8n6w?file=/public/index.html)
-
 ### How to automatically apply the theme based on user's preferences?
 
 a.k.a `prefers-color-scheme`
 
 You should use [prefers-dark.js](./prefers-dark.js) to detect if it is supported. If so, the theme will be applied automatically. Place it in the top of the `head` of your HTML (execute early to reduce the flash of light theme).
+
+[By the way, you can check one of the examples](/examples)
 
 If you're looking for a CSS only approach, you could give [tailwindcss-theming](https://github.com/innocenzi/tailwindcss-theming) a try.
 
