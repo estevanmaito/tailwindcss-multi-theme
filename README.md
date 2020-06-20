@@ -85,6 +85,34 @@ The same way you would write it in HTML (`dark:hover:bg-red-100`) you write in y
 
 So, if you're already using `focus-within`, it would be called `dark:focus-within`, considering your theme is called `dark`.
 
+### Using inside CSS with `@apply`
+
+If you're more into writing some CSS using `@apply`, you could try this:
+
+```css
+input {
+	@apply bg-gray-300;
+}
+
+input:focus {
+	@apply bg-white;
+}
+
+/**
+ * Place your theme styles inside .theme-<your-theme>
+ * In this case, we have themeVariants: ['dark']
+ */
+.theme-dark {
+	input {
+		@apply bg-gray-800;
+	}
+
+	input:focus {
+		@apply bg-gray-500;
+	}
+}
+```
+
 ### How to automatically apply the theme based on user's preferences?
 
 a.k.a `prefers-color-scheme`
