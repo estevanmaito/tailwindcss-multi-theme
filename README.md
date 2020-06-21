@@ -103,13 +103,13 @@ input:focus {
  * In this case, we have themeVariants: ['dark']
  */
 .theme-dark {
-	input {
-		@apply bg-gray-800;
-	}
+  input {
+    @apply bg-gray-800;
+  }
 
-	input:focus {
-		@apply bg-gray-500;
-	}
+  input:focus {
+    @apply bg-gray-500;
+  }
 }
 ```
 
