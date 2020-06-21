@@ -87,7 +87,7 @@ So, if you're already using `focus-within`, it would be called `dark:focus-withi
 
 ### Using inside CSS with `@apply`
 
-If you're more into writing some CSS using `@apply`, you could try this:
+If you're more into writing some CSS using `@apply`, you could try the code below. Note that it needs nesting support, and you can find more about it [in the official docs](https://tailwindcss.com/docs/using-with-preprocessors/#nesting).
 
 ```css
 input {
@@ -110,6 +110,18 @@ input:focus {
 	input:focus {
 		@apply bg-gray-500;
 	}
+}
+```
+
+If you want to avoid nesting for some reason, this syntax is also perfectly valid:
+
+```css
+.theme-dark input {
+  @apply bg-gray-800;
+}
+
+.theme-dark input:focus {
+  @apply bg-gray-500;
 }
 ```
 
