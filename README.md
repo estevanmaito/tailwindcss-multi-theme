@@ -87,15 +87,25 @@ So, if you're already using `focus-within`, it would be called `dark:focus-withi
 
 ### Using inside CSS with `@apply`
 
+**UPDATE**: Tailwind CSS ^1.7.0 ([Use `@apply` with variants and other complex classes](https://github.com/tailwindlabs/tailwindcss/releases/tag/v1.7.0#use-apply-with-variants-and-other-complex-classes)) now supports this syntax:
+
+```css
+.btn {
+  @apply border-4 border-gray-300 dark:border-dark-gray-600;
+}
+```
+
+Another way, (and the only way for Tailwind CSS prior to v1.7.0), is the following.
+
 If you're more into writing some CSS using `@apply`, you could try the code below. Note that it needs nesting support, and you can find more about it [in the official docs](https://tailwindcss.com/docs/using-with-preprocessors/#nesting).
 
 ```css
 input {
-	@apply bg-gray-300;
+  @apply bg-gray-300;
 }
 
 input:focus {
-	@apply bg-white;
+  @apply bg-white;
 }
 
 /**
