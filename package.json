@@ -53,7 +53,7 @@
     "postcss": "7.0.30",
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
-    "semantic-release": "^17.0.8",
+    "semantic-release": "^19.0.3",
     "tailwindcss": "1.4.6",
     "webpack": "4.43.0",
     "webpack-cli": "3.3.11",
