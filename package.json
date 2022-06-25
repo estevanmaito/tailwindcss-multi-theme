@@ -2,7 +2,7 @@
   "name": "tailwindcss-multi-theme",
   "version": "0.0.0-development",
   "description": "The easiest way to create themes with Tailwind CSS.",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "files": [
     "dist",
     "prefers-dark.js",
