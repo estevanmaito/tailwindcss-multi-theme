@@ -26,6 +26,9 @@
   },
   "keywords": ["tailwind", "theme", "dark", "multi"],
   "author": "Estevan Maito <ejmaito@gmail.com>",
+  "contributors": [
+    "Hervé Perchec <herve.perchec@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/estevanmaito/tailwindcss-multi-theme/issues"
@@ -51,13 +54,13 @@
     "jest": "26.0.1",
     "lodash": "4.17.19",
     "postcss": "7.0.30",
+    "postcss-selector-parser": "6.0.2",
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
     "semantic-release": "^17.0.8",
-    "tailwindcss": "1.4.6",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.10",
     "webpack": "4.43.0",
-    "webpack-cli": "3.3.11",
-    "postcss-selector-parser": "6.0.2"
+    "webpack-cli": "3.3.11"
   },
   "config": {
     "commitizen": {
@@ -68,8 +71,5 @@
     "hooks": {
       "pre-commit": "npm run lint && npm run test:coverage"
     }
-  },
-  "peerDependencies": {
-    "tailwindcss": "^1.4.6"
   }
 }
