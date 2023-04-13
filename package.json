@@ -1,6 +1,6 @@
 {
   "name": "@hperchec/tailwindcss-multi-theme",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "The easiest way to create themes with Tailwind CSS.",
   "main": "dist/index.js",
   "files": [
