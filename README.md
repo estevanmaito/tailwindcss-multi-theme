@@ -1,17 +1,18 @@
 # Tailwind CSS Multi Theme
 
-<p>
-  <a href="https://codecov.io/gh/estevanmaito/tailwindcss-multi-theme"><img src="https://codecov.io/gh/estevanmaito/tailwindcss-multi-theme/branch/master/graph/badge.svg" alt="codecov" /></a>
-  <a href="https://travis-ci.com/github/estevanmaito/tailwindcss-multi-theme"><img src="https://img.shields.io/travis/estevanmaito/tailwindcss-multi-theme" alt="Travis (.org)" /></a>
-  <a href="https://www.npmjs.com/package/tailwindcss-multi-theme"><img src="https://img.shields.io/npm/v/tailwindcss-multi-theme" alt="npm" /></a>
-  <a href="https://github.com/estevanmaito/tailwindcss-multi-theme/blob/master/LICENSE"><img src="https://img.shields.io/github/license/estevanmaito/tailwindcss-multi-theme" alt="MIT License" /></a>
-</p>
+This project is a fork of [estevanmaito/tailwindcss-multi-theme](https://github.com/estevanmaito/tailwindcss-multi-theme/).
 
-Most theme plugins ask too much from the start. If you know how to create a simple page with default Tailwind, you already know how to use this theme plugin.
+Please read the [docs](https://github.com/estevanmaito/tailwindcss-multi-theme/) of the parent repository.
 
-[🧪 See it live](https://tailwindcss-multi-theme.now.sh/)
+> **WARNING**: this plugin is designed for Tailwind v2!
 
-[🧱 See examples](/examples)
+## Additional features
+
+Based on the original version of [estevanmaito/tailwindcss-multi-theme](https://github.com/estevanmaito/tailwindcss-multi-theme/) plugin, this following has been added:
+
+- migrate to tailwindcss@2.2.17
+- plugin now accepts [options](#options)
+- support for [special characters](#theme-names) in theme name
 
 ## 💿 Install
 
@@ -22,14 +23,28 @@ npm install tailwindcss-multi-theme
 In `tailwind.config.js` add `themeVariants` to the `theme` property, with the value(s) of your theme(s), and require the plugin. That's it.
 
 ```js
+// tailwind.config.js
+const multiThemePlugin = require('tailwindcss-multi-theme')
+
 module.exports = {
+  // Disable dark mode -> theme management is provided by multi-theme plugin
+  darkMode: false,
   theme: {
-    themeVariants: ['dark']
+    themeVariants: [
+      // Define themes here
+      'light',
+      'dark',
+      'banana'
+    ]
   },
   variants: {
-    // just add dark to any variant that you want to style
+    // just add 'light', 'dark' and 'banana' to any variant that you want to style
   },
-  plugins: [require('tailwindcss-multi-theme')],
+  plugins: [
+    // Multi-theme plugin
+    multiThemePlugin(),
+    // ...
+  ]
 }
 ```
 
@@ -39,114 +54,224 @@ It will create a set of classes based on your `variants` and expect a class `.th
 
 ## 🚀 Usage
 
-👉 `themeVariants` is the only configuration option.
+### Options
 
-It expects an array of strings, so there is **no limit** to how many themes you can create. Want a dark and a neon theme (you don't need to specify your default)? Do this:
+|name              |type              |default                 |
+|-                 |-                 |-                       |
+|themeClassPrefix  |`String`          |`'theme-'`              |
+
+**Example**:
 
 ```js
+// tailwind.config.js
+plugins: [
+  multiThemePlugin({
+    /**
+     * Overwrite default theme class name themeClassPrefix
+     * It will generate:
+     * - 'light' class instead of 'theme-light'
+     * - 'dark' class instead of 'theme-dark'
+     * - 'banana' class instead of 'theme-banana'
+     * - ...
+     */
+    themeClassPrefix: ''
+  }),
+  // ...
+],
+```
+
+### Theme names
+
+You can use special characters in your theme names (see also [CSS specification](https://www.w3.org/TR/CSS2/syndata.html#characters) or [this topic](https://stackoverflow.com/questions/2812072/allowed-characters-for-css-identifiers)).
+
+**Example**:
+
+Here, we add `@` prefix to the theme names to easily identify theme in class names:
+
+```js
+// tailwind.config.js
+const multiThemePlugin = require('tailwindcss-multi-theme')
+
 module.exports = {
+  // Disable dark mode -> theme management is provided by multi-theme plugin
+  darkMode: false,
   theme: {
-    themeVariants: ['dark', 'neon']
+    themeVariants: [
+      // Define themes here
+      '@light',
+      '@dark',
+      '@banana'
+    ],
+    // Theme colors
+    colors: {
+      white:                  '#FFFFFF',
+      black:                  '#000000',
+      '@light-alabaster':     '#FAFAFA',
+      '@dark-tuna':           '#36393F',
+      '@banana-sandy-yellow': '#FFEA78',
+      // and other theme colors...
+    },
   },
   variants: {
-    // just add dark and neon to any variant that you want to style
+    extend: {
+      backgroundColor: [
+        '@light',
+        '@light:hover',
+        '@light:focus',
+        '@dark',
+        '@dark:hover',
+        '@dark:focus'
+      ],
+      // ...
+    }
   },
-  plugins: [require('tailwindcss-multi-theme')],
+  plugins: [
+    // Multi-theme plugin
+    multiThemePlugin({
+      themeClassPrefix: ''
+    }),
+    // ...
+  ]
 }
 ```
 
-You can now place the class `.theme-dark` or `.theme-neon` at the top of your HTML (eg. on `body` or an enclosing `div`) and just write classes like:
+In this example, it will generate:
 
-`dark:bg-gray-900 dark:text-gray-300`
+- class names: `@light`, `@dark`, `@banana` (e.g. set attribute `class="@light"` to the `<html>` element to apply *light* theme)
+- tailwind variants: `@light`, `@dark`, `@banana` (e.g. set class `@dark:hover:bg-red` to apply a red background on hover for *dark* theme)
 
-But just this won't work. You need to specify what variants of your theme you want, in your `variants`:
+### Good practices
+
+It's suggested to define your theme colors in a separated file (for example `./themes.js` in your project):
+
+> **TIP**: you can use a tool like [color-name-finder](https://colors.artyclick.com/color-name-finder/) to name your colors correctly
 
 ```js
-...
-variants: {
-  backgroundColor: ['responsive', 'hover', 'focus', 'dark'],
-  textColor: ['responsive', 'hover', 'focus', 'dark'],
-},
-...
-```
+// Example: themes.js
 
-What if you need to style the `hover`, `focus` or any other variant on some specific theme?
-
-```js
-...
-variants: {
-  backgroundColor: ['responsive', 'hover', 'focus', 'dark', 'dark:hover', 'dark:focus'],
-  textColor: ['responsive', 'hover', 'focus', 'dark', 'dark:hover', 'dark:focus'],
-},
-...
-```
-
-The same way you would write it in HTML (`dark:hover:bg-red-100`) you write in your `variants` settings, just by adding a `:` before the variant.
-
-So, if you're already using `focus-within`, it would be called `dark:focus-within`, considering your theme is called `dark`.
-
-### Using inside CSS with `@apply`
-
-**UPDATE**: Tailwind CSS ^1.7.0 ([Use `@apply` with variants and other complex classes](https://github.com/tailwindlabs/tailwindcss/releases/tag/v1.7.0#use-apply-with-variants-and-other-complex-classes)) now supports this syntax:
-
-```css
-.btn {
-  @apply border-4 border-gray-300 dark:border-dark-gray-600;
-}
-```
-
-Another way, (and the only way for Tailwind CSS prior to v1.7.0), is the following.
-
-If you're more into writing some CSS using `@apply`, you could try the code below. Note that it needs nesting support, and you can find more about it [in the official docs](https://tailwindcss.com/docs/using-with-preprocessors/#nesting).
-
-```css
-input {
-  @apply bg-gray-300;
+const commonColors = {
+  // primary, secondary, etc... should be the same for all themes
+  "primary": "#3B68CF",
+  "secondary": "#36393F",
+  // ...
 }
 
-input:focus {
-  @apply bg-white;
-}
-
-/**
- * Place your theme styles inside .theme-<your-theme>
- * In this case, we have themeVariants: ['dark']
- */
-.theme-dark {
-  input {
-    @apply bg-gray-800;
-  }
-
-  input:focus {
-    @apply bg-gray-500;
+module.exports = {
+  themes: {
+    // 'light' theme specific colors
+    'light': {
+      ...commonColors,
+      'alabaster': '#FAFAFA',
+      'text-primary': '#191919'
+    },
+    // 'dark' theme specific colors
+    'dark': {
+      ...commonColors,
+      'tuna': '#36393F',
+      'text-primary': '#F9F9F9'
+    },
+    // 'banana' theme specific colors
+    'banana': {
+      ...commonColors,
+      'sandy-yellow': '#FFEA78',
+      'text-primary': '#121212'
+    }
   }
 }
 ```
 
-If you want to avoid nesting for some reason, this syntax is also perfectly valid:
+Then you can dynamically set in `tailwind.config.js`:
 
-```css
-.theme-dark input {
-  @apply bg-gray-800;
-}
+```js
+// Example: tailwind.config.js
+const multiThemePlugin = require('tailwindcss-multi-theme')
+const themes = require('./themes.js')
 
-.theme-dark input:focus {
-  @apply bg-gray-500;
+module.exports = {
+  darkMode: false,
+  theme: {
+    themeVariants: [
+      /**
+       * It will generate theme names:
+       * - '@light'
+       * - '@dark'
+       * - '@banana'
+       */
+      ...Object.keys(themes).map((theme) => {
+        return `@${theme}`
+      })
+    ],
+    colors: {
+      /**
+       * It will generate colors:
+       * - '@light-primary'
+       * - '@light-secondary'
+       * - '@light-alabaster'
+       * - '@light-text-primary'
+       * - '@dark-primary'
+       * - '@dark-secondary'
+       * - '@dark-tuna'
+       * - '@dark-text-primary'
+       * - '@banana-primary'
+       * - '@banana-secondary'
+       * - '@banana-sandy-yellow'
+       * - '@banana-text-primary'
+       */
+      ...Object.keys(themes).reduce((colors, themeName) => {
+        // Loop on theme colors
+        for (const color in themes[themeName]) {
+          const colorName = `@${themeName}-${color}`
+          const colorValue = themes[themeName][color]
+          obj[colorName] = colorValue
+        }
+        return obj
+      }, {})
+    },
+  },
+  plugins: [
+    // Multi-theme plugin
+    multiThemePlugin({
+      themeClassPrefix: ''
+    }),
+    // ...
+  ],
+  //...
 }
 ```
 
-### How to automatically apply the theme based on user's preferences?
+So, you can use the generated theme colors:
 
-a.k.a `prefers-color-scheme`
+```html
+<!-- 
+  Example: apply a background color and a text color to the <body> element
+  depending on what theme is applied
+-->
+<body
+  class="
+    @light:bg-@light-alabaster
+    @light:text-@light-text-primary
+    @dark:bg-@dark-tuna
+    @dark:text-@dark-text-primary
+    @banana:bg-@banana-sandy-yellow
+    @banana:text-@banana-text-primary
+  "
+>
+  ...
+</body>
+```
 
-You should use [prefers-dark.js](./prefers-dark.js) to detect if it is supported. If so, the theme will be applied automatically. Place it in the top of the `head` of your HTML (execute early to reduce the flash of light theme).
+OR (in style):
 
-[By the way, you can check one of the examples](/examples)
-
-If you're looking for a CSS only approach, you could give [tailwindcss-theming](https://github.com/innocenzi/tailwindcss-theming) a try.
-
-## ❓ Why another theme plugin?
-
-I'll tell you the truth. I'm lazy. I created this plugin for people that, like me, just want to keep writing Tailwind CSS as always, with the same familiar syntax, no theme files, no extensive obligatory docs read to know how to color my backgrounds.
-
-It just prepends your theme variable to the good old Tailwind classes.
+```scss
+body {
+  // 'light' theme rules
+  @apply @light:bg-@light-alabaster;
+  @apply @light:text-@light-text-primary;
+  // 'dark' theme rules
+  @apply @dark:bg-@dark-tuna;
+  @apply @dark:text-@dark-text-primary;
+  // 'banana' theme rules
+  @apply @banana:bg-@banana-sandy-yellow;
+  @apply @banana:text-@banana-text-primary;
+}
+```

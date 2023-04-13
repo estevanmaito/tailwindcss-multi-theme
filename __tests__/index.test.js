@@ -2,12 +2,12 @@ import postcss from 'postcss'
 import tailwindcss from 'tailwindcss'
 import plugin from '../src/index'
 
-const generatePluginCss = (config = {}) => {
+const generatePluginCss = (config = {}, pluginOptions = {}) => {
   return postcss(
     tailwindcss({
       theme: {},
       corePlugins: false,
-      plugins: [plugin],
+      plugins: [plugin(pluginOptions)],
       ...config,
     })
   )
@@ -62,6 +62,32 @@ describe('plugin', () => {
           'tailwindcss-multi-theme found themeVariants but it is empty. Pass it a list of strings or remove it.'
         )
       })
+  })
+
+  it('should accept allowed characters for css identifiers in theme variant name and escape it', () => {
+    return generatePluginCss({
+      ...baseTestTheme,
+      theme: {
+        themeVariants: ['@dark'],
+        colors: {
+          gray: {
+            '100': '#333333',
+          },
+        }
+      },
+      variants: {
+        textColor: ['@dark'],
+      },
+    }).then((css) => {
+      expect(css).toMatchCss(`
+        .text-gray-100 {
+          color: #333333
+        }
+        .theme-\\@dark .\\@dark\\:text-gray-100 {
+          color: #333333
+        }
+      `)
+    })
   })
 
   it('should generate base classes variants', () => {
@@ -321,6 +347,24 @@ describe('plugin', () => {
           color: #333333
         }
         .theme-dark .dark\\:disabled\\:text-gray-100:disabled {
+          color: #333333
+        }
+      `)
+    })
+  })
+
+  it('should process themeClassPrefix plugin option and adapt class names', () => {
+    return generatePluginCss({
+      ...baseTestTheme,
+      variants: {
+        textColor: ['dark'],
+      },
+    }, { themeClassPrefix: 'prefix_' }).then((css) => {
+      expect(css).toMatchCss(`
+        .text-gray-100 {
+          color: #333333
+        }
+        .prefix_dark .dark\\:text-gray-100 {
           color: #333333
         }
       `)
