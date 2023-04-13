@@ -1,19 +1,18 @@
 # Tailwind CSS Multi Theme
 
-<p>
-  <a href="https://codecov.io/gh/estevanmaito/tailwindcss-multi-theme"><img src="https://codecov.io/gh/estevanmaito/tailwindcss-multi-theme/branch/master/graph/badge.svg" alt="codecov" /></a>
-  <a href="https://travis-ci.com/github/estevanmaito/tailwindcss-multi-theme"><img src="https://img.shields.io/travis/estevanmaito/tailwindcss-multi-theme" alt="Travis (.org)" /></a>
-  <a href="https://www.npmjs.com/package/tailwindcss-multi-theme"><img src="https://img.shields.io/npm/v/tailwindcss-multi-theme" alt="npm" /></a>
-  <a href="https://github.com/estevanmaito/tailwindcss-multi-theme/blob/master/LICENSE"><img src="https://img.shields.io/github/license/estevanmaito/tailwindcss-multi-theme" alt="MIT License" /></a>
-</p>
+This project is a fork of [estevanmaito/tailwindcss-multi-theme](https://github.com/estevanmaito/tailwindcss-multi-theme/).
 
-Most theme plugins ask too much from the start. If you know how to create a simple page with default Tailwind, you already know how to use this theme plugin.
+Please read the [docs](https://github.com/estevanmaito/tailwindcss-multi-theme/) of the parent repository.
 
 > **WARNING**: this plugin is designed for Tailwind v2!
 
-[🧪 See it live](https://tailwindcss-multi-theme.now.sh/)
+## Additional features
 
-[🧱 See examples](/examples)
+Based on the original version of [estevanmaito/tailwindcss-multi-theme](https://github.com/estevanmaito/tailwindcss-multi-theme/) plugin, this following has been added:
+
+- migrate to tailwindcss@2.2.17
+- plugin now accepts [options](#options)
+- support for [special characters](#theme-names) in theme name
 
 ## 💿 Install
 
